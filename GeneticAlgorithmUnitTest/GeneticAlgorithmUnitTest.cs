@@ -13,7 +13,7 @@ namespace GeneticAlgorithmUnitTest
         private GeneticAlgorithm.GeneticAlgorithm GA = new GeneticAlgorithm.GeneticAlgorithm();
         private const int CL = 15;
         private Random random = new Random();
-        private FitnessHelper FH;
+        private IFitnessHelper FH;
 
         [TestMethod]
         public void TestCrossover()
@@ -52,7 +52,7 @@ namespace GeneticAlgorithmUnitTest
                     sb.Append(Math.Floor(2 * random.NextDouble()).ToString());
                 }
                 goal = sb.ToString();
-                FH = new FitnessHelper(goal);
+                FH = new BitStringFitnessHelper(goal);
                 f = FH.Fitness;
 
                 Assert.AreEqual(goal, GA.Run(f, size, 0.6, 0.002));
@@ -77,7 +77,7 @@ namespace GeneticAlgorithmUnitTest
                     sb.Append(Math.Floor(2 * random.NextDouble()).ToString());
                 }
                 goal = sb.ToString();
-                FH = new FitnessHelper(goal);
+                FH = new BitStringFitnessHelper(goal);
                 f = FH.Fitness;
 
                 Assert.AreEqual(goal, GA.Run(f, size, 0.6, 0.002));
@@ -101,7 +101,7 @@ namespace GeneticAlgorithmUnitTest
                     sb.Append(Math.Floor(2 * random.NextDouble()).ToString());
                 }
                 goal = sb.ToString();
-                FH = new FitnessHelper(goal);
+                FH = new BitStringFitnessHelper(goal);
                 f = FH.Fitness;
 
                 Assert.AreEqual(goal, GA.Run(f, size, 0.6, 0.002, 600));
@@ -125,7 +125,7 @@ namespace GeneticAlgorithmUnitTest
                     sb.Append(Math.Floor(2 * random.NextDouble()).ToString());
                 }
                 goal = sb.ToString();
-                FH = new FitnessHelper(goal);
+                FH = new BitStringFitnessHelper(goal);
                 f = FH.Fitness;
 
                 Assert.AreEqual(goal, GA.Run(f, size, 0.6, 0.002, 2000));

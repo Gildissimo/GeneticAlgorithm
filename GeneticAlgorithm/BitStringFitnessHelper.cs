@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace GeneticAlgorithm
 {
-    public class FitnessHelper
+    public class BitStringFitnessHelper : IFitnessHelper
     {
         // assumes chromosome and solution are bitstrings
         private string solution;
@@ -16,7 +16,7 @@ namespace GeneticAlgorithm
             return score;
         }
 
-        public FitnessHelper(string targetSolution)
+        public BitStringFitnessHelper(string targetSolution)
         {
             solution = targetSolution;
         }
