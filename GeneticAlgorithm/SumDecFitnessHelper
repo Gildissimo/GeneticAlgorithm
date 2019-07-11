@@ -1,0 +1,49 @@
+using System;
+
+namespace GeneticAlgorithm{
+    public class SumDecFitnessHelper : IFitnessHelper{
+        private int target { get; set; }
+        private int[] sumArray { get; set; }
+        public SumDecFitnessHelper(int[] arr, int target)
+        {
+            this.sumArray = arr;
+            this.target = target;
+        }
+
+        public double Fitness(string chromosome)
+        {
+            if (chromosome.Length != sumArray.Length)
+            {
+                return 0.0;
+            }
+            int sum = SumDecFitnessHelper.computeSum(sumArray, chromosome);
+
+            //return 1.0 / (double)(Math.Abs(target - sum) + 1.0);
+
+            //should i consider the solution with the minimum number of 1 (e.g. 1101 or 0011 is 7)
+            int countOnes = chromosome.Where(el => el == '1').Count();
+
+            var sumabs = Math.Abs(target - sum);
+            var oneWeight = sumabs != 0 ? (double)0 : (double)(chromosome.Length / countOnes);
+            
+            var fitnessvalue = oneWeight * (1.0 / (double)(sumabs + 1.0));
+
+            System.Diagnostics.Trace.WriteLine("Fitness Value for <"+ chromosome + "> : "+ fitnessvalue+ " , one weight = <"+ oneWeight+">, sum <"+ sumabs + ">");
+
+            return fitnessvalue;
+        }
+
+        public static int computeSum(int[] sumArray, string chromosome)
+        {
+            int sum = 0;
+            for (int i = 0; i < sumArray.Length; ++i)
+            {
+                if (chromosome[i].CompareTo('1') == 0)
+                {
+                    sum += sumArray[i];
+                }
+            }
+            return sum;
+        }
+    }
+}
