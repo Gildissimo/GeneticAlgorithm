@@ -150,6 +150,25 @@ namespace GeneticAlgorithmUnitTest
 
             Assert.AreEqual(goal, hypothesis);
         }
+        
+        [TestMethod]
+        public void SmallSumDecTest()
+        {
+            // representation of 10 in terms of summand inclusion
+            // SumFitnessHelper could be adapted to take an int
+            String goal = "0011";
+            int[] summands = new int[]{1, 2, 3, 4};
+
+            FH = new SumDecFitnessHelper(summands, goal);
+            Func<string, double> f;
+            f = FH.Fitness;
+
+            int size = goal.Length;
+
+            string hypothesis = GA.Run(f, size, 0.6, 0.002, 500);
+
+            Assert.AreEqual(goal, hypothesis);
+        }
 
         
     }
